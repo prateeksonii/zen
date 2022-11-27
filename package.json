@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run build:css && remix build",
+    "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
+    "deploy": "deployctl deploy --prod --include=build,public --project=<your deno deploy project> ./build/index.js",
+    "dev": "remix build && run-p \"dev:*\"",
+    "dev:deno": "cross-env NODE_ENV=development deno run --unstable --watch --allow-net --allow-read --allow-env ./build/index.js",
+    "dev:remix": "remix watch",
+    "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
+    "format": "deno fmt --ignore=node_modules,build,public/build",
+    "lint": "deno lint --ignore=node_modules,build,public/build",
+    "start": "cross-env NODE_ENV=production deno run --unstable --allow-net --allow-read --allow-env ./build/index.js"
+  },
+  "dependencies": {
+    "@remix-run/deno": "^1.7.6",
+    "@remix-run/react": "^1.7.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.7.6",
+    "@tailwindcss/forms": "^0.5.3",
+    "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.19",
+    "tailwindcss": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
